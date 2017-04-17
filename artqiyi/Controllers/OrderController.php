@@ -4,6 +4,7 @@ namespace Artqiyi\Controllers;
 
 use App\Http\Controllers\Controller;
 use Artqiyi\Controllers\BaseController;
+use Artqiyi\Logics\OrderLogic;
 use Artqiyi\Models\CouponModel;
 use Artqiyi\Models\OrderModel;
 use Artqiyi\Models\OrderWareModel;
@@ -37,20 +38,9 @@ class OrderController extends BaseController
         return view('order.confirm', compact('order', 'coupons'));
     }
 
-    public function pay($order_id, Request $request)
+    public function pay($order_id)
     {
-        $order = OrderModel::find($order_id);
-
-        $order->money_payable = $order->wares()->lists('total_price')->sum();
-
-
-        if ($request->coupon_id) {
-            $order->money_reduce = CouponModel::find($request->coupon_id)->amount;
-        }
-
-        $order->money_paid = $order->money_payable - $order->money_reduce;
-        $order->status = 1;
-        $order->save();
+        OrderLogic::pay($order_id);
 
         return redirect(route('ware.index'));
     }

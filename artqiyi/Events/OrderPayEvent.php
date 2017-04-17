@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Events\Artqiyi\Events;
+namespace Artqiyi\Events;
 
 use App\Events\Event;
 use Illuminate\Queue\SerializesModels;
@@ -15,9 +15,9 @@ class OrderPayEvent extends Event
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($order)
     {
-        //
+        $this->order = $order;
     }
 
     /**

@@ -12,14 +12,7 @@ class EventServiceProvider extends ServiceProvider
      *
      * @var array
      */
-    protected $listen = [
-        'App\Events\SomeEvent' => [
-            'App\EventListener',
-        ],
-        'Artqiyi\Events\OrderPayEvent' => [
-            'Artqiyi\OrderPayListener'
-        ]
-    ];
+    protected $listen;
 
     /**
      * Register any other events for your application.
@@ -29,6 +22,10 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot(DispatcherContract $events)
     {
+        $hook = config('artqiyi.hook');
+        if (!empty($hook)) {
+            $this->listen = $hook;
+        }
         parent::boot($events);
 
         //
