@@ -21,7 +21,10 @@
         "psr-4": {
             "App\\": "app/",
             "Artqiyi\\" : "artqiyi"
-        }
+        },
+        "files" : [
+            "artqiyi/helpers.php"
+        ]
     },
     "autoload-dev": {
         "classmap": [

@@ -33,9 +33,8 @@ class OrderController extends BaseController
 
     public function confirm($order_id)
     {
-        $coupons = Auth::user()->coupons;
         $order = OrderModel::find($order_id);
-        return view('order.confirm', compact('order', 'coupons'));
+        return view('order.confirm', compact('order'));
     }
 
     public function pay($order_id)
